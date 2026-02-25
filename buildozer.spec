@@ -64,3 +64,4 @@ warn_on_root = 1
 
 # Android SDK 和 NDK 的下载路径（通常自动处理）
 # android.accept_sdk_license = True
+android.accept_sdk_license = True
