@@ -1,67 +1,181 @@
-# buildozer.spec
-# 用于 Android APK 打包的完整配置
-
 [app]
-# 应用的基本信息
+
+# (str) Title of your application
 title = GuGu App
+
+# (str) Package name
 package.name = guguapp
+
+# (str) Package domain (needed for android/ios packaging)
 package.domain = org.example
 
-# 源代码目录（通常为当前目录）
+# (str) Source code where the main.py lives
 source.dir = .
 
-# 需要包含的文件扩展名（必须包含 mp3，否则声音文件不会打包）
+# (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas,mp3
 
-# 版本号
+# (str) Application versioning
 version = 0.1
-# 版本代号（用于 Google Play）
 version.code = 1
 
-# 应用的 requirements（依赖库）
+# (list) Application requirements
 requirements = python3,kivy
 
-# 应用图标（可选，如果没有可留空）
-# icon = icon.png
-# 应用启动画面（可选）
-# presplash = splash.png
-
-# 支持的 Android 架构（默认包含所有主流架构）
-android.archs = armeabi-v7a, arm64-v8a
-
-# 屏幕方向（portrait 或 landscape，默认为 portrait）
+# (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
 
-# 全屏模式（隐藏状态栏和导航栏）
+# (bool) Indicate if the application should be fullscreen
 fullscreen = 1
 
-# 权限（你的应用不需要特殊权限，留空即可）
-# android.permissions =
+# Android specific
+#
 
-# Android API 级别（Buildozer 会自动选择合适版本）
-# android.api = 30
-# android.minapi = 21
+# (list) Permissions
+#android.permissions = INTERNET
 
-# 如果使用 SDL2 后端（Kivy 默认）
-# android.sdk = 34
+# (int) Android API to use
+android.api = 33
 
-# 打包时的额外命令行参数（一般不需要）
-# android.gradle_dependencies = ''
+# (int) Minimum API required
+android.minapi = 21
 
-# 应用分类（用于 Google Play）
-# android.category = GAME
+# (int) Android SDK version to use
+android.sdk = 33
+
+# (str) Android NDK version to use
+android.ndk = 25b
+
+# (bool) If True, then automatically accept SDK license
+android.accept_sdk_license = True
+
+# (str) Specify a specific build-tools version to use
+android.build_tools_version = 34.0.0
+
+# (list) The Android architectures to build for
+android.archs = armeabi-v7a, arm64-v8a
+
+# (str) The Android NDK directory (if empty, it will be automatically downloaded.)
+#android.ndk_path =
+
+# (str) The Android SDK directory (if empty, it will be automatically downloaded.)
+#android.sdk_path =
+
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
+
+# (bool) If True, then skip trying to update the Android sdk
+#android.skip_update = False
+
+# (bool) If True, then download the NDK and use it. If False, use the existing NDK
+#android.ndk_download = True
+
+# (bool) If True, then accept the NDK license
+#android.ndk_accept_license = False
+
+# (str) Path to a custom AndroidManifest.xml
+#android.manifest =
+
+# (str) Path to a custom strings.xml
+#android.strings =
+
+# (str) Path to a custom template gradle project
+#android.gradle_project_template =
+
+# (str) Path to a custom source code template
+#android.project_template =
+
+# (str) Argument to pass to the buildozer gradle command
+#android.gradle_build_args =
+
+# (str) Path to the Java classes to include
+#android.add_src =
+
+# (str) Path to the Java library to include
+#android.add_libs =
+
+# (list) List of Java files/classes to add (if they are not in the src directory)
+#android.add_src = src/java
+
+# (list) List of Java libraries to add (if they are not in the libs directory)
+#android.add_libs = libs/*.jar
+
+# (str) Path to a AAR library to include
+#android.add_aar =
+
+# (list) List of AAR libraries to include
+#android.add_aars =
+
+# (list) List of recipes to build with python-for-android
+#android.recipes =
+
+# (str) The directory that contains the python-for-android source code
+#android.p4a_dir =
+
+# (str) The branch of python-for-android to use
+#android.p4a_branch = master
+
+# (str) The directory that contains the python-for-android distribution
+#android.p4a_dist_dir =
+
+# (str) The name of the python-for-android distribution
+#android.p4a_dist_name =
+
+# (bool) Use the python-for-android bootstrap that can handle multiple architectures
+#android.p4a_multiapi = False
+
+# (str) Extra arguments to pass to the python-for-android build
+#android.p4a_args =
+
+# (str) Extra command to run before the python-for-android build
+#android.p4a_pre_build_command =
+
+# (str) Extra command to run after the python-for-android build
+#android.p4a_post_build_command =
+
+# (list) List of Java versions to include
+#android.java_versions = 8,11,17
+
+# (str) Path to the Java keystore (for release signing)
+#android.keystore =
+
+# (str) Password for the Java keystore
+#android.keystore_password =
+
+# (str) Alias for the Java keystore
+#android.keystore_alias =
+
+# (str) Path to the Java key
+#android.key =
+
+# (str) Password for the Java key
+#android.key_password =
+
+# (bool) If True, then the application will be debuggable
+#android.debug = False
+
+# (list) Android extra manifests to add
+#android.extra_manifests =
+
+# (list) Android extra resources to add
+#android.extra_resources =
+
+# (list) Android extra libraries to add
+#android.extra_libs =
+
+# (list) Android extra Java sources to add
+#android.extra_java_src =
+
+# (list) Android native libraries to add
+#android.extra_native_libs =
 
 [buildozer]
-# 日志级别（0=安静, 1=标准, 2=详细）
+
+# (int) Log level (0 = quiet, 1 = normal, 2 = verbose)
 log_level = 2
 
-# 是否在构建后自动运行（一般设为 0）
-warn_on_root = 1
+# (str) Path to build artifacts storage
+#build_dir = ./.buildozer
 
-# 构建输出目录（通常保持默认）
-# bin_dir = ./bin
-# build_dir = ./.buildozer
-
-# Android SDK 和 NDK 的下载路径（通常自动处理）
-# android.accept_sdk_license = True
-android.accept_sdk_license = True
+# (str) Path to build output (i.e., .apk, .ipa) storage
+#bin_dir = ./bin
