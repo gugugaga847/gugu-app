@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: List files in current directory
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
