@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04   # 使用 Ubuntu 20.04 避免 autoconf 问题
+    runs-on: ubuntu-22.04   # 使用 Ubuntu 22.04
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -22,13 +22,6 @@ jobs:
             libffi-dev libssl-dev
           pip install --user --upgrade Cython==0.29.33 virtualenv
           pip install --user --upgrade buildozer
-      - name: Accept Android SDK licenses (if SDK already downloaded)
-        run: |
-          if [ -f /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager ]; then
-            yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses
-          else
-            echo "SDK not yet downloaded, licenses will be accepted during build via buildozer.spec"
-          fi
       - name: Build with buildozer
         run: |
           export PATH=$PATH:~/.local/bin
