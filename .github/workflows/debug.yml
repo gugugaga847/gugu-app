@@ -8,13 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: List files in current directory
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "Files in root:"
-          ls -la
-          echo "Files in .github/workflows:"
-          ls -la .github/workflows/ || echo "No .github/workflows directory"
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -25,6 +18,14 @@ jobs:
           sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
           pip install --user --upgrade Cython==0.29.33 virtualenv
           pip install --user --upgrade buildozer
+      - name: Accept Android SDK licenses (if SDK already downloaded)
+        run: |
+          # 等待Buildozer下载SDK后手动接受所有许可证（包括预览版）
+          if [ -f /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager ]; then
+            yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses
+          else
+            echo "SDK not yet downloaded, licenses will be accepted during build via buildozer.spec"
+          fi
       - name: Build with buildozer
         run: |
           export PATH=$PATH:~/.local/bin
