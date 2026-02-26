@@ -1,7 +1,7 @@
 name: Build Debug APK
 
 on:
-  workflow_dispatch:   # 手动触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,12 +15,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+          sudo apt install -y \
+            git zip unzip openjdk-17-jdk python3-pip \
+            autoconf libtool pkg-config zlib1g-dev \
+            libncurses5-dev libncursesw5-dev cmake \
+            libffi-dev libssl-dev \
+            autoconf-archive libtool-bin   # 新增：提供额外宏
           pip install --user --upgrade Cython==0.29.33 virtualenv
           pip install --user --upgrade buildozer
       - name: Accept Android SDK licenses (if SDK already downloaded)
         run: |
-          # 等待Buildozer下载SDK后手动接受所有许可证（包括预览版）
           if [ -f /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager ]; then
             yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses
           else
