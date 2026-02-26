@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04   # 使用 Ubuntu 22.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -22,6 +22,13 @@ jobs:
             libffi-dev libssl-dev
           pip install --user --upgrade Cython==0.29.33 virtualenv
           pip install --user --upgrade buildozer
+      - name: Set Java 17 as default
+        run: |
+          # 确保使用 Java 17
+          sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
+          echo "$JAVA_HOME/bin" >> $GITHUB_PATH
       - name: Build with buildozer
         run: |
           export PATH=$PATH:~/.local/bin
